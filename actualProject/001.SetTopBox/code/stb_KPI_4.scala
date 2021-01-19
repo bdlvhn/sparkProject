@@ -4,7 +4,7 @@ import org.apache.spark.sql.SparkSession
 import java.text.SimpleDateFormat
 import scala.xml.XML
 
-class stb_KPI_5 {
+object stb_KPI_4 {
   def main(args: Array[String]) {
     
     if (args.length < 2) {
@@ -14,28 +14,29 @@ class stb_KPI_5 {
     
     val spark = SparkSession
 				.builder
-				.appName("stb_KPI_5")
+				.appName("stb_KPI_4")
 				.getOrCreate()
     
-    val data = spark.read.textFile(args(0)).rdd
+		val data = spark.read.textFile(args(0)).rdd
 //    val data = spark.read.textFile("/home/hoon/project/spark/001.SetTopBox/data/Set_Top_Box_Data.txt").rdd
 			
-		val record = data.filter { x => x.contains("^0^")}.map { line => {
+		val record = data.filter { x => x.contains("^118^")}.map { line => {
 		  val tokens = line.split("\\^")
 		  val xmlValue = XML.loadString(tokens(4))
-		  xmlValue
-		  }}.filter(x => ((x\\"nv").take(2).takeRight(1)\@"n").equals("BadBlocks"))
-    
-		val badBlocks = record.map { line => {
+      xmlValue
+		  }}	
+				
+		val Duration = record.map { line => {
 		  val valueSeq = line \\ "nv"
-		  val badBlocks = (valueSeq.theSeq(0) \@"v").toInt
-		  ("BadBlocks",badBlocks)
+		  val durSec = (valueSeq.theSeq(valueSeq.length-1) \@ "v").toInt
+		  durSec
 		  }
 		}
-  
-		badBlocks.saveAsTextFile(args(1))
+    
+		val maxMin = (Duration.max,Duration.min)
+		
+		spark.sparkContext.parallelize(Seq(maxMin)).saveAsTextFile(args(1))
 		
     spark.stop
-		  
   }
 }

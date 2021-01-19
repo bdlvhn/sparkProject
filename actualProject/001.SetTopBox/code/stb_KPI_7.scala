@@ -4,7 +4,7 @@ import org.apache.spark.sql.SparkSession
 import java.text.SimpleDateFormat
 import scala.xml.XML
 
-class stb_KPI_7 {
+object stb_KPI_7 {
   def main(args: Array[String]) {
     
     if (args.length < 2) {
