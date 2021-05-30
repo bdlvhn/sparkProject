@@ -25,8 +25,6 @@ Data" Tags="&lt;bigdata&gt;&lt;r&gt;" AnswerCount="8" CommentCount="1" FavoriteC
 ```
 
 ## Post Data Format
-
-Id
 + PostTypeId (listed in the PostTypestable)
 1. Question
 2. Answer
