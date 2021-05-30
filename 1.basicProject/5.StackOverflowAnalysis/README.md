@@ -10,56 +10,74 @@
 - input : 사용할 데이터파일이 담긴 폴더
 - output : 결과물을 저장할 폴더
 
-## 문제 설명
-*소매 구매 데이터 세트를 분석하고 아래 정의된 대로 KPI를 구현합니다.*
-
-1. 모든 스토어에 걸쳐 제품 범주별로 판매 내역을 계산합니다.
-2. 모든 스토어에 걸친 스토어별 판매 내역을 계산합니다. 도시당 하나의 스토어가 있다고 가정합니다.
-3. 모든 스토어에서 총 판매 값과 총 판매 수를 찾습니다.
-
-## Data Format
-
-+ Country Name
-+ Date
-+ "Transit: Railways, (million passenger-km)"
-+ "Transit: Passenger cars (per 1,000 people)"
-+ Business: Mobile phone subscribers
-+ Business: Internet users (per 100 people)
-+ "Health: Mortality
-+ under-5 (per 1,000 live births)"
-+ Health: Health expenditure per capita (current US$)
-+ "Health: Health expenditure, total (% GDP)"
-+ Population: Total (count)
-+ Population: Urban (count)
-+ "Population:: Birth rate, crude (per 1,000)"
-+ "Health: Life expectancy at birth, female (years)"
-+ "Health: Life expectancy at birth, male (years)"
-+ "Health: Life expectancy at birth, total (years)"
-+ Population: Ages 0-14 (% of total)
-+ Population: Ages 15-64 (% of total)
-+ Population: Ages 65+ (% of total)
-+ Finance: GDP (current US$)
-+ Finance: GDP per capita (current US$)
-
-## Sample Data
+## Sample Post Data
 ```
-Afghanistan,7/1/2000,0,,0,,151,11,8,"25,950,816","5,527,524",51,45,45,45,48,50,2,,
-Afghanistan,7/1/2001,0,,0,0,150,11,9,"26,697,430","5,771,984",50,46,45,46,48,50,2,"2,461,666,315",92
-Afghanistan,7/1/2002,0,,"25,000",0,150,22,7,"27,465,525","6,025,936",49,46,46,46,48,50,2,"4,338,907,579",158
-Afghanistan,7/1/2003,0,,"200,000",0,151,25,8,"28,255,719","6,289,723",48,46,46,46,48,50,2,"4,766,127,272",169
-Afghanistan,7/1/2004,0,,"600,000",0,150,30,9,"29,068,646","6,563,700",47,46,46,46,48,50,2,"5,704,202,651",196
-Afghanistan,7/1/2005,0,,"1,200,000",1,151,33,9,"29,904,962","6,848,236",47,47,47,47,48,50,2,"6,814,753,581",228
-Afghanistan,7/1/2006,0,11,"2,520,366",2,151,24,7,"30,751,661","7,158,987",46,47,47,47,48,50,2,"7,721,931,671",251
-Afghanistan,7/1/2007,0,18,"4,668,096",2,150,29,7,"31,622,333","7,481,844",45,47,47,47,47,50,2,"9,707,373,721",307
-Afghanistan,7/1/2008,0,19,"7,898,909",2,150,32,7,"32,517,656","7,817,245",45,48,47,48,47,51,2,"11,940,296,131",367
-Afghanistan,7/1/2009,0,21,"12,000,000",3,149,34,8,"33,438,329","8,165,640",44,48,48,48,47,51,2,"14,213,670,485",425
-Afghanistan,7/1/2010,0,,"13,000,000",4,149,38,8,"34,385,068","8,527,497",44,48,48,48,46,51,2,"17,243,112,604",501
+<row Id="41" PostTypeId="1" AcceptedAnswerId="44" CreationDate="2014-05-14T11:15:40.907"
+Score="28" ViewCount="1897" Body="&lt;p&gt;R has many libraries which are aimed at Data Analysis
+(e.g. JAGS, BUGS, ARULES etc..), and is mentioned in popular textbooks such as: J.Krusche, Doing
+Bayesian Data Analysis; B.Lantz, &quot;Machine Learning with
+R&quot;.&lt;/p&gt;&#xA;&#xA;&lt;p&gt;I've seen a guideline of 5TB for a dataset to be considered as
+Big Data.&lt;/p&gt;&#xA;&#xA;&lt;p&gt;My question is: Is R suitable for the amount of Data typically
+seen in Big Data problems? &#xA;Are there strategies to be employed when using R with this size of
+dataset?&lt;/p&gt;&#xA;" OwnerUserId="136" LastEditorUserId="118" LastEditDate="2014-05-
+14T13:06:28.407" LastActivityDate="2015-04-12T05:00:23.663" Title="Is the R language suitable for Big
+Data" Tags="&lt;bigdata&gt;&lt;r&gt;" AnswerCount="8" CommentCount="1" FavoriteCount="13" />
 ```
 
-## 문제 정의
-1. 최고 도시 인구 - 최고 도시 인구 국가
-2. 인구가 가장 많은 국가 - 인구의 내림차순 국가 목록
-3. 최고 인구 증가 - 지난 10년 동안 가장 높은 인구 증가율을 보인 국가
-4. GDP 성장률 최고치 - 2009년부터 2010년까지 GDP 성장률이 가장 높은 나라 목록 내림차순
-5. 인터넷 사용량 증가 - 지난 10년 동안 인터넷 사용량이 가장 많이 증가한 국가
-6. 최연소 국가 - 연간 최연소 국가 분포
+## Post Data Format
+
+Id
++ PostTypeId (listed in the PostTypestable)
+1. Question
+2. Answer
+3. Orphaned tag wiki
+4. Tag wiki excerpt
+5. Tag wiki
+6. Moderator nomination
+7. “Wiki placeholder” (seems to only be the election description)
+8. Privilege wiki
++ AcceptedAnswerId (only present if PostTypeId is 1)
++ Parent ID (only present if PostTypeId is 2)
++ CreationDate
++ DeletionDate(only non-null for the SEDEPostsWithDeleted table. Deleted posts are not present
+on Posts. Column not present on data dump.)
++ Score
++ ViewCount(nullable)
++ Body (as rendered HTML, not Markdown)
++ OwnerUserId (only present if user has not been deleted; always -1 for tag wiki entries, i.e. the
+community user owns them)
++ OwnerDisplayName (nullable)
++ LastEditorUserId (nullable)
++ LastEditorDisplayName (nullable)
++ LastEditDate="2009-03-05T22:28:34.823" - the date and time of the most recent edit to the post
+(nullable)
++ LastActivityDate="2009-03-11T12:51:01.480" - the date and time of the most recent activity on
+the post. For a question, this could be the post being edited, a new answer was posted, a bounty
+was started, etc.
++ Title (nullable)
++ Tags (nullable)
++ AnswerCount(nullable)
++ CommentCount
++ FavoriteCount
++ ClosedDate (present only if the post is closed)
++ CommunityOwnedDate (present only if post is community wikied)
+
+## 문제 정의 (KPI)
+1. Count the total number of questions in the available data-set and collect the questions id of all
+the questions
+2. Monthly questions count –provide the distribution of number of questions asked per month
+3. Provide the number of posts which are questions and contains specified words in their title (like
+data, science, nosql, hadoop, spark)
+4. The trending questions which are viewed and scored highly by the user – Top 10 highest viewed
+questions with specific tags
+5. The questions that doesn’t have any answers –Number of questions with “0” number of
+answers
+6. Number of questions with more than 2 answers
+7. Number of questions which are active for last 6 months
+8. Questions which are marked closed for each category – provide the distribution of number of
+closed questions per month
+9. The most scored questions with specific tags – Top 10 questions having tag hadoop, spark
+10. List of all the tags along with their counts
+11. Number of question with specific tags(nosql, big data) which was asked in the specified time
+range (from 01-01-2015 to 31-12-2015)
+12. Average time for a post to get a correct answer
