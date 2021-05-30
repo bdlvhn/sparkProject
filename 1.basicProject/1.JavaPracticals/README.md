@@ -1,4 +1,4 @@
-## Spark Project 1 - Java Practicals
+## Spark Project - 1.1 Java Practicals
 
 > 목적 : 자바의 스파크 패키지를 활용하여 기본적인 데이터 처리를 구현한다.
 
